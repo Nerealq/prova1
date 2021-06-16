@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<title> This is a page </title>
+<body>
+	
+	<h1> This is a heading </h1>
+	<p id="principal">This is a page </p>
+
+	<input type="text" id="text_cp">
+	<input type="button" value="Click" id="the_button">
+
+	<script>
+
+		document
+		.getElementById("the_button")
+		.addEventListener("click",() =>{
+
+			var cp=document.getElementById("text_cp").value;
+
+			var url='http://api.geonames.org/postalCodeSearchJSON?postalcode='+cp+'&country=ES&maxRows=10&username=nelaq_';
+
+			console.log(url);
+
+			fetch(url)
+			.then(resposta => resposta.json ())
+			.then(json => {
+							document
+							.getElementById("principal")
+							.innerHTML = json.postalCodes[0].placeName;
+			})
+			.catch(error => console.log (error));
+
+		});
+	</script>
+
+</body>
+</html>
+
